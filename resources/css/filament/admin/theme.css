@@ -1,0 +1,89 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+
+/*
+ * Tema admin: putih, hitam, dan lime, sama seperti website portfolio.
+ * Warna utama (lime) dan font diatur di AdminPanelProvider.
+ * Nama kelas fi-* berasal dari Filament. Bila setelah update Filament ada
+ * aturan yang tidak lagi berlaku, cukup hapus aturan itu, tampilan dasar tetap utuh.
+ */
+
+:root {
+    --pf-ink: #1A1A1A;
+    --pf-lime: #B7FF45;
+    --pf-paper: #F4F4F2;
+    --pf-line: 1.5px solid var(--pf-ink);
+}
+
+/* kanvas */
+body {
+    background-color: var(--pf-paper);
+}
+
+/* judul halaman, editorial seperti di website */
+.fi-header-heading {
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+/* panel konten: garis tipis hitam, sudut membulat, tanpa bayangan */
+.fi-section,
+.fi-ta-ctn,
+.fi-wi-stats-overview-stat,
+.fi-simple-main {
+    background-color: #fff;
+    border: var(--pf-line);
+    border-radius: 20px;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+/* bilah atas dan samping */
+.fi-topbar {
+    border-bottom: var(--pf-line);
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+.fi-sidebar {
+    border-right: var(--pf-line);
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+}
+
+/* menu aktif: lime dengan teks hitam */
+.fi-sidebar-item-active > .fi-sidebar-item-btn {
+    background-color: var(--pf-lime);
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-sidebar-item-active .fi-icon {
+    color: var(--pf-ink) !important;
+    font-weight: 700;
+}
+
+.fi-sidebar-group-label {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* tombol berbentuk pil */
+.fi-btn {
+    border-radius: 999px;
+    font-weight: 700;
+}
+
+/* kolom isian */
+.fi-input-wrp {
+    border-radius: 14px;
+}
+
+/* fokus yang jelas */
+:focus-visible {
+    outline: 3px solid var(--pf-ink);
+    outline-offset: 2px;
+}
