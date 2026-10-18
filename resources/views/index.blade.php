@@ -91,7 +91,9 @@
             <h2 id="svc-title">What I <span class="hl">Do</span></h2>
             <p class="lede">Areas I'm exploring, learning, and building projects in.</p>
         </div>
-        <div class="svc-grid" id="svc-grid"></div>
+        <div class="svc-grid" id="svc-grid">
+            @include('sections.services')
+        </div>
     </div>
 </section>
 
@@ -115,8 +117,19 @@
             hands-on projects.
         </p>
 
-        <div class="hi-grid" id="hi-grid"></div>
-        <div class="facts" id="facts"></div>
+        <div class="hi-grid" id="hi-grid">
+            @include('sections.highlights')
+        </div>
+        @if ($facts->isNotEmpty())
+        <div class="facts" id="facts">
+            <div class="facts-head"><span class="eyebrow">A bit more</span></div>
+            <dl>
+                @foreach ($facts as $fact)
+                    <div><dt>{{ $fact->label }}</dt><dd>{{ $fact->value }}</dd></div>
+                @endforeach
+            </dl>
+        </div>
+        @endif
     </div>
         <div class="about-art" data-rv>
             <svg viewBox="0 0 480 480" role="img"
@@ -167,17 +180,24 @@
         <div class="sec-head" data-rv>
             <span class="eyebrow">Timeline</span>
             <h2 id="jr-title">My <span class="hl">Journey</span> So Far</h2>
-            <p class="lede">Education, activities, and learning experiences. Replace the sample entries with
-                your own, and add only what is true.</p>
+            <p class="lede">Education, activities, and learning experiences.</p>
         </div>
         <div class="jr-grid">
             <div class="jr-col edu-col" data-rv>
                 <h3>Education</h3>
-                <div class="tl" id="edu-list"></div>
+                <div class="tl" id="edu-list">
+                    @foreach ($education as $entry)
+                        @include('sections.timeline-item')
+                    @endforeach
+                </div>
             </div>
             <div class="jr-col" data-rv>
                 <h3>Experience &amp; Activities</h3>
-                <div class="tl" id="exp-list"></div>
+                <div class="tl" id="exp-list">
+                    @foreach ($experience as $entry)
+                        @include('sections.timeline-item')
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -193,7 +213,9 @@
             <span class="legend"><i aria-hidden="true"></i> Highlighted chips are what I'm currently
                 exploring</span>
         </div>
-        <div class="sk-grid" id="sk-grid"></div>
+        <div class="sk-grid" id="sk-grid">
+            @include('sections.skills')
+        </div>
     </div>
 </section>
 
@@ -206,9 +228,7 @@
             <p class="lede">A collection of experiments, academic work, and projects built through curiosity.
             </p>
         </div>
-        <div class="filters" id="filters" role="group" aria-label="Filter projects by type"></div>
-        <p class="count" id="pj-count" aria-live="polite"></p>
-        <div class="proj-grid" id="proj-grid"></div>
+        @include('sections.projects')
     </div>
 </section>
 
@@ -222,20 +242,66 @@
                 <p class="lede">I'm always open to discussing technology, sharing ideas, learning opportunities,
                     and interesting projects.</p>
                 <div class="cta-row">
-                    <a class="btn btn-primary" id="mail-cta" href="#">Send Me an Email <svg class="arr"
+                    <a class="btn btn-primary" id="mail-cta"
+                        href="mailto:{{ $profile->email }}?subject={{ rawurlencode('Hello from your portfolio') }}">Send Me an Email <svg class="arr"
                             viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M7 17 17 7M8 7h9v9" />
                         </svg></a>
                 </div>
                 <div class="mail-line">
-                    <span class="mail-addr" id="mail-addr"></span>
+                    <span class="mail-addr" id="mail-addr">{{ $profile->email }}</span>
                     <button class="copy" id="copy-btn" type="button">Copy address</button>
                     <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
                 </div>
                 <p class="note" id="copy-note">The button opens your mail app. If nothing happens, copy the
                     address and write from your own email.</p>
             </div>
-            <ul class="soc" id="soc"></ul>
+            <ul class="soc" id="soc">
+                @foreach ($socials as $s)
+                    <li><a href="{{ $s->url }}"@if ($s->isExternal()) target="_blank" rel="noopener noreferrer"@endif><span><small>{{ $s->label }}</small><strong>{{ $s->handle }}</strong></span>@include('partials.arrow')</a></li>
+                @endforeach
+            </ul>
+
+            <form class="cform" id="contact-form" method="POST" action="{{ route('contact.store') }}" novalidate>
+                @csrf
+                <h3 class="cform-title">Or send a message here</h3>
+
+                @if (session('contact_status'))
+                    <p class="cform-alert" role="status" tabindex="-1" id="cform-status">{{ session('contact_status') }}</p>
+                @elseif ($errors->any())
+                    <p class="cform-alert err" role="alert" tabindex="-1" id="cform-status">Please fix the highlighted fields and send again.</p>
+                @endif
+
+                <div class="cform-row">
+                    <div class="field">
+                        <label for="cf-name">Name</label>
+                        <input id="cf-name" name="name" type="text" value="{{ old('name') }}" maxlength="100"
+                            autocomplete="name" required @error('name') aria-invalid="true" aria-describedby="cf-name-err" @enderror>
+                        @error('name')<p class="field-err" id="cf-name-err">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="field">
+                        <label for="cf-email">Email</label>
+                        <input id="cf-email" name="email" type="email" value="{{ old('email') }}" maxlength="150"
+                            autocomplete="email" required @error('email') aria-invalid="true" aria-describedby="cf-email-err" @enderror>
+                        @error('email')<p class="field-err" id="cf-email-err">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="cf-message">Message</label>
+                    <textarea id="cf-message" name="message" rows="5" maxlength="2000" required
+                        @error('message') aria-invalid="true" aria-describedby="cf-message-err" @enderror>{{ old('message') }}</textarea>
+                    @error('message')<p class="field-err" id="cf-message-err">{{ $message }}</p>@enderror
+                </div>
+
+                {{-- Honeypot anti-spam: disembunyikan dari manusia, bot sering mengisinya. --}}
+                <div class="hp" aria-hidden="true">
+                    <label for="cf-website">Leave this field empty</label>
+                    <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button class="btn btn-primary" type="submit" id="cform-submit">Send Message @include('partials.arrow')</button>
+            </form>
         </div>
     </div>
 </section>
