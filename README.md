@@ -1,58 +1,139 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Personal Portfolio — lxngvr
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A personal portfolio website showcasing my background, technical skills, projects, and learning journey as an Informatics student.
 
-## About Laravel
+## About the Project
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is my personal space to document my growth in technology and software development. It presents my academic background, technical interests, selected projects, and ongoing learning journey.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+As an Informatics student, I am particularly interested in data science, machine learning, and data engineering. Through this portfolio, I aim to showcase my work, explore new technologies, and continuously develop my technical skills.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+- **Backend:** PHP 8.3+, Laravel 13
+- **Frontend:** Tailwind CSS 4
+- **Build Tool:** Vite 7
+- **Additional Framework:** Filament 5
+- **Package Managers:** Composer and npm
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Personal Introduction** — An overview of my background and interests.
+- **Education & Experience** — Academic background and relevant experiences.
+- **Skills & Technologies** — A showcase of technical skills and tools.
+- **Project Showcase** — Selected projects and development work.
+- **Contact Form** — A way to get in touch through the portfolio website.
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+*Note: The feature list should reflect the current implementation of the website.*
 
-## Agentic Development
+## Getting Started
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Follow these steps to run the project locally.
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+- PHP 8.3 or later
+- Composer
+- Node.js and npm
+- A database supported by Laravel
+
+### Installation
+
+**1. Clone the repository**
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/lxngvr/myportofolio.git
+cd myportofolio
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+**2. Install PHP dependencies**
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**3. Configure the environment**
 
-## Code of Conduct
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Update the database configuration in your `.env` file according to your local environment.
 
-## Security Vulnerabilities
+**4. Run database migrations**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan migrate
+```
 
-## License
+**5. Install frontend dependencies**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+npm install
+```
+
+**6. Start the development servers**
+
+Open a terminal and run:
+
+```bash
+composer run dev
+```
+
+This starts the Laravel development server and the Vite development process using the project's configured development script.
+
+**7. Open the website**
+
+Visit:
+
+```text
+http://localhost:8000
+```
+
+## Project Structure
+
+```text
+myportofolio/
+├── app/          # Application logic and controllers
+├── bootstrap/    # Framework bootstrap files
+├── config/       # Application configuration
+├── database/     # Migrations, factories, and seeders
+├── public/       # Public assets and entry point
+├── resources/    # Frontend resources and views
+├── routes/       # Application routes
+├── storage/      # Logs and generated application files
+├── tests/        # Automated tests
+├── composer.json # PHP dependencies and scripts
+├── package.json  # Frontend dependencies and scripts
+└── vite.config.js
+```
+
+## Development
+
+To compile frontend assets for production:
+
+```bash
+npm run build
+```
+
+To run the application's automated tests:
+
+```bash
+composer test
+```
+
+## Project Status
+
+This portfolio is a work in progress. I will continue improving its design, content, functionality, and overall user experience as I gain new knowledge and build more projects.
+
+## Connect with Me
+
+- **GitHub:** [@lxngvr](https://github.com/lxngvr)
+- **Portfolio Repository:** [myportofolio](https://github.com/lxngvr/myportofolio)
+
+---
+
+*Built with curiosity, consistency, and a passion for continuous learning.*
