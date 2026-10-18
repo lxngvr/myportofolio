@@ -29,9 +29,13 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->brandName('Portfolio Admin')
+            ->darkMode(false) // website hanya punya satu tema (terang), admin mengikuti
+            ->font('Plus Jakarta Sans')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => '#B7FF45',   // lime yang sama dengan website
+                'gray' => Color::Stone,   // abu hangat, dekat dengan #F4F4F2
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
