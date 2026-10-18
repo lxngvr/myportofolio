@@ -139,6 +139,31 @@
         });
     }
 
+
+    /* ---------- form kontak ---------- */
+    var cform = $("#contact-form");
+    if (cform) {
+        var submitBtn = $("#cform-submit");
+        var label = submitBtn ? submitBtn.innerHTML : "";
+        cform.addEventListener("submit", function () {
+            // Cegah kirim dobel. Validasi sebenarnya dilakukan server.
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Sending...";
+            }
+        });
+        // Tombol kembali ke normal bila halaman dipulihkan dari cache browser.
+        window.addEventListener("pageshow", function () {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = label;
+            }
+        });
+        // Pindahkan fokus ke pesan hasil agar terbaca pembaca layar.
+        var status = $("#cform-status");
+        if (status) status.focus({ preventScroll: true });
+    }
+
     /* ---------- link aktif + animasi muncul ---------- */
     if ("IntersectionObserver" in window) {
         var links = {};

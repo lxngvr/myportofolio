@@ -1509,3 +1509,121 @@ h2 {
         transform: none
     }
 }
+
+
+/* contact form */
+.cform {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 18px;
+    border-top: var(--line);
+    padding-top: clamp(24px, 4vw, 40px)
+}
+
+.cform-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+    font-weight: 800;
+    letter-spacing: -.025em
+}
+
+.cform-row {
+    display: grid;
+    gap: 18px
+}
+
+@media (min-width:700px) {
+    .cform-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+}
+
+.field {
+    display: grid;
+    gap: 8px;
+    min-width: 0
+}
+
+.field label {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    text-transform: uppercase
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: #fff;
+    border: var(--line);
+    border-radius: var(--r-md);
+    padding: 13px 16px;
+    min-height: 48px;
+    transition: box-shadow .2s, background .2s
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 140px
+}
+
+.field input:hover,
+.field textarea:hover {
+    background: var(--paper)
+}
+
+.field input:focus-visible,
+.field textarea:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+    background: #fff
+}
+
+.field [aria-invalid="true"] {
+    border-color: #B3261E;
+    box-shadow: 0 0 0 1px #B3261E
+}
+
+.field-err {
+    margin: 0;
+    color: #B3261E;
+    font-size: 14px;
+    font-weight: 600
+}
+
+.cform-alert {
+    margin: 0;
+    padding: 14px 18px;
+    border: var(--line);
+    border-radius: var(--r-md);
+    background: var(--lime);
+    font-weight: 600
+}
+
+.cform-alert.err {
+    background: #fff;
+    border-color: #B3261E;
+    color: #B3261E
+}
+
+.cform .btn {
+    justify-self: start
+}
+
+.cform .btn[disabled] {
+    opacity: .6;
+    cursor: progress;
+    transform: none
+}
+
+/* honeypot: di luar layar, bukan display:none (bot melewati yang itu) */
+.hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden
+}

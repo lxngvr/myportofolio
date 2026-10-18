@@ -261,6 +261,47 @@
                     <li><a href="{{ $s->url }}"@if ($s->isExternal()) target="_blank" rel="noopener noreferrer"@endif><span><small>{{ $s->label }}</small><strong>{{ $s->handle }}</strong></span>@include('partials.arrow')</a></li>
                 @endforeach
             </ul>
+
+            <form class="cform" id="contact-form" method="POST" action="{{ route('contact.store') }}" novalidate>
+                @csrf
+                <h3 class="cform-title">Or send a message here</h3>
+
+                @if (session('contact_status'))
+                    <p class="cform-alert" role="status" tabindex="-1" id="cform-status">{{ session('contact_status') }}</p>
+                @elseif ($errors->any())
+                    <p class="cform-alert err" role="alert" tabindex="-1" id="cform-status">Please fix the highlighted fields and send again.</p>
+                @endif
+
+                <div class="cform-row">
+                    <div class="field">
+                        <label for="cf-name">Name</label>
+                        <input id="cf-name" name="name" type="text" value="{{ old('name') }}" maxlength="100"
+                            autocomplete="name" required @error('name') aria-invalid="true" aria-describedby="cf-name-err" @enderror>
+                        @error('name')<p class="field-err" id="cf-name-err">{{ $message }}</p>@enderror
+                    </div>
+                    <div class="field">
+                        <label for="cf-email">Email</label>
+                        <input id="cf-email" name="email" type="email" value="{{ old('email') }}" maxlength="150"
+                            autocomplete="email" required @error('email') aria-invalid="true" aria-describedby="cf-email-err" @enderror>
+                        @error('email')<p class="field-err" id="cf-email-err">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="cf-message">Message</label>
+                    <textarea id="cf-message" name="message" rows="5" maxlength="2000" required
+                        @error('message') aria-invalid="true" aria-describedby="cf-message-err" @enderror>{{ old('message') }}</textarea>
+                    @error('message')<p class="field-err" id="cf-message-err">{{ $message }}</p>@enderror
+                </div>
+
+                {{-- Honeypot anti-spam: disembunyikan dari manusia, bot sering mengisinya. --}}
+                <div class="hp" aria-hidden="true">
+                    <label for="cf-website">Leave this field empty</label>
+                    <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button class="btn btn-primary" type="submit" id="cform-submit">Send Message @include('partials.arrow')</button>
+            </form>
         </div>
     </div>
 </section>
