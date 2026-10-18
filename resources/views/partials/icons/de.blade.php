@@ -1,0 +1,1 @@
+<svg class="ic" viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="20" width="14" height="22" rx="4"/><rect x="25" y="20" width="14" height="22" rx="4" class="lime"/><rect x="46" y="20" width="14" height="22" rx="4"/><path d="M18 31h7M39 31h7M22 27l3 4-3 4M43 27l3 4-3 4M8 52h48"/></svg>
