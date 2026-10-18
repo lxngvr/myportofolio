@@ -9,6 +9,7 @@ use App\Filament\Resources\SkillGroups\Schemas\SkillGroupForm;
 use App\Filament\Resources\SkillGroups\Tables\SkillGroupsTable;
 use App\Models\SkillGroup;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,9 +19,13 @@ class SkillGroupResource extends Resource
 {
     protected static ?string $model = SkillGroup::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 
-    protected static ?string $recordTitleAttribute = 'skillGroup';
+    protected static string|UnitEnum|null $navigationGroup = 'Content';
+
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {

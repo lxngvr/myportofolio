@@ -9,6 +9,7 @@ use App\Filament\Resources\ProfileFacts\Schemas\ProfileFactForm;
 use App\Filament\Resources\ProfileFacts\Tables\ProfileFactsTable;
 use App\Models\ProfileFact;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,9 +19,13 @@ class ProfileFactResource extends Resource
 {
     protected static ?string $model = ProfileFact::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSparkles;
 
-    protected static ?string $recordTitleAttribute = 'profileFact';
+    protected static string|UnitEnum|null $navigationGroup = 'Profile';
+
+    protected static ?int $navigationSort = 5;
+
+    protected static ?string $recordTitleAttribute = 'label';
 
     public static function form(Schema $schema): Schema
     {

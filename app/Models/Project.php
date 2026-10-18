@@ -15,7 +15,15 @@ class Project extends Model
         'web' => 'Web & Software',
     ];
 
-    public const THUMBS = ['bars', 'scatter', 'pipeline', 'browser', 'donut', 'matrix'];
+    /** Kunci partial thumbnail => nama yang tampil di admin. */
+    public const THUMB_LABELS = [
+        'bars' => 'Bar chart',
+        'scatter' => 'Scatter plot',
+        'pipeline' => 'Data pipeline',
+        'browser' => 'Web app window',
+        'donut' => 'Donut and line chart',
+        'matrix' => 'Confusion matrix',
+    ];
 
     protected $fillable = [
         'type', 'thumb', 'is_dark', 'title', 'description', 'contribution',

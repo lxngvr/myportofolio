@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Projects\Tables;
 
+use App\Models\Project;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class ProjectsTable
@@ -14,37 +16,20 @@ class ProjectsTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
-                TextColumn::make('type')
-                    ->searchable(),
-                TextColumn::make('thumb')
-                    ->searchable(),
-                IconColumn::make('is_dark')
-                    ->boolean(),
                 TextColumn::make('title')
-                    ->searchable(),
-                TextColumn::make('url')
-                    ->searchable(),
-                TextColumn::make('repo_url')
-                    ->searchable(),
-                TextColumn::make('demo_url')
-                    ->searchable(),
-                TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
-                IconColumn::make('is_published')
-                    ->boolean(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()
+                    ->limit(50),
+                TextColumn::make('type')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state) => Project::TYPES[$state] ?? $state),
+                ToggleColumn::make('is_published')
+                    ->label('Published'),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')->options(Project::TYPES),
             ])
             ->recordActions([
                 EditAction::make(),

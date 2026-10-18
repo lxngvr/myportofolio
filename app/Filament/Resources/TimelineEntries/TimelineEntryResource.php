@@ -9,6 +9,7 @@ use App\Filament\Resources\TimelineEntries\Schemas\TimelineEntryForm;
 use App\Filament\Resources\TimelineEntries\Tables\TimelineEntriesTable;
 use App\Models\TimelineEntry;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,9 +19,13 @@ class TimelineEntryResource extends Resource
 {
     protected static ?string $model = TimelineEntry::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
 
-    protected static ?string $recordTitleAttribute = 'timelineEntry';
+    protected static string|UnitEnum|null $navigationGroup = 'Content';
+
+    protected static ?int $navigationSort = 2;
+
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Schema $schema): Schema
     {

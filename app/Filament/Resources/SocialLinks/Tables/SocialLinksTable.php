@@ -13,27 +13,14 @@ class SocialLinksTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->defaultSort('sort_order')
+            ->reorderable('sort_order')
             ->columns([
                 TextColumn::make('label')
                     ->searchable(),
-                TextColumn::make('handle')
-                    ->searchable(),
+                TextColumn::make('handle'),
                 TextColumn::make('url')
-                    ->searchable(),
-                TextColumn::make('sort_order')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+                    ->limit(50),
             ])
             ->recordActions([
                 EditAction::make(),

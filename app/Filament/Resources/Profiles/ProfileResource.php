@@ -9,6 +9,7 @@ use App\Filament\Resources\Profiles\Schemas\ProfileForm;
 use App\Filament\Resources\Profiles\Tables\ProfilesTable;
 use App\Models\Profile;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,9 +19,19 @@ class ProfileResource extends Resource
 {
     protected static ?string $model = Profile::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUser;
 
-    protected static ?string $recordTitleAttribute = 'profiles';
+    protected static string|UnitEnum|null $navigationGroup = 'Profile';
+
+    protected static ?int $navigationSort = 6;
+
+    protected static ?string $recordTitleAttribute = 'name';
+
+    /** Portfolio hanya punya satu profil: tombol tambah hilang bila sudah ada. */
+    public static function canCreate(): bool
+    {
+        return Profile::count() === 0;
+    }
 
     public static function form(Schema $schema): Schema
     {

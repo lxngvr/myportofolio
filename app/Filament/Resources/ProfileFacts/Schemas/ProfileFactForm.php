@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\ProfileFacts\Schemas;
 
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class ProfileFactForm
@@ -13,12 +13,14 @@ class ProfileFactForm
         return $schema
             ->components([
                 TextInput::make('label')
-                    ->required(),
+                    ->helperText('Contoh: Interests, Learning philosophy, Current focus.')
+                    ->required()
+                    ->maxLength(80),
                 Textarea::make('value')
                     ->required()
+                    ->rows(3)
                     ->columnSpanFull(),
                 TextInput::make('sort_order')
-                    ->required()
                     ->numeric()
                     ->default(0),
             ]);

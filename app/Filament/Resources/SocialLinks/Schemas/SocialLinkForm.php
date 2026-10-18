@@ -12,14 +12,18 @@ class SocialLinkForm
         return $schema
             ->components([
                 TextInput::make('label')
-                    ->required(),
-                TextInput::make('handle')
-                    ->required(),
-                TextInput::make('url')
-                    ->url()
-                    ->required(),
-                TextInput::make('sort_order')
+                    ->helperText('Contoh: Email, GitHub, LinkedIn, Instagram.')
                     ->required()
+                    ->maxLength(50),
+                TextInput::make('handle')
+                    ->helperText('Teks yang tampil, misalnya @username.')
+                    ->required()
+                    ->maxLength(100),
+                TextInput::make('url')
+                    ->helperText('Mulai dengan https:// atau mailto: untuk email.')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('sort_order')
                     ->numeric()
                     ->default(0),
             ]);
